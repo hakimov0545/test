@@ -1,0 +1,525 @@
+/* =========================================================
+   ABDULAZIZ.DEV — umumiy stil fayli
+   Mavzu: dark theme + terminal-yashil aksent
+   Shriftlar: JetBrains Mono (sarlavhalar/nav) + Inter (matn)
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  /* --- Rang tokenlari --- */
+  --bg: #0a0d0b;
+  --bg-panel: #11150f;
+  --bg-panel-2: #151b13;
+  --border: #223327;
+  --text: #eef2ec;
+  --text-muted: #93a196;
+  --accent: #4fd97a;
+  --accent-dim: #2a6b40;
+  --accent-soft: rgba(79, 217, 122, 0.12);
+
+  /* --- Tipografiya --- */
+  --font-head: "JetBrains Mono", ui-monospace, monospace;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* --- Layout --- */
+  --max-width: 920px;
+  --radius: 10px;
+}
+
+/* Reduced motion afzalligini hurmat qilamiz */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  background-image:
+    radial-gradient(
+      ellipse 900px 500px at 10% -10%,
+      rgba(79, 217, 122, 0.07),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 700px 400px at 100% 0%,
+      rgba(79, 217, 122, 0.05),
+      transparent 55%
+    );
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: var(--radius);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease;
+}
+a:hover {
+  color: #85f0a6;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-head);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6em;
+}
+
+p {
+  margin: 0 0 1.1em;
+  color: var(--text);
+  max-width: 68ch;
+}
+.muted {
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   HEADER / NAVIGATSIYA
+   ========================================================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10, 13, 11, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.logo span {
+  color: var(--accent);
+}
+.logo:hover {
+  color: var(--accent);
+}
+
+.main-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.main-nav a {
+  color: var(--text-muted);
+  font-family: var(--font-head);
+  font-size: 0.88rem;
+  padding: 8px 14px;
+  border-radius: 8px;
+  position: relative;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease;
+}
+
+.main-nav a:hover {
+  color: var(--text);
+  background: var(--bg-panel-2);
+}
+
+.main-nav a[aria-current="page"] {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* Faqat CSS orqali ishlaydigan mobil menyu (checkbox usuli) */
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-label {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+}
+.nav-toggle-label span {
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+@media (max-width: 640px) {
+  .nav-toggle-label {
+    display: flex;
+  }
+
+  .main-nav {
+    flex-basis: 100%;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    gap: 2px;
+    transition: max-height 0.35s ease;
+  }
+
+  .nav-toggle:checked ~ .main-nav {
+    max-height: 300px;
+    margin-top: 12px;
+  }
+
+  .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .main-nav a {
+    padding: 12px 14px;
+  }
+}
+
+/* =========================================================
+   MAIN / UMUMIY BOSHQARUV
+   ========================================================= */
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* Sahifa ochilganda matn va rasmlar yumshoq paydo bo'ladi */
+@keyframes softAppear {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.appear {
+  animation: softAppear 0.7s ease both;
+}
+.appear-delay-1 {
+  animation-delay: 0.08s;
+}
+.appear-delay-2 {
+  animation-delay: 0.16s;
+}
+.appear-delay-3 {
+  animation-delay: 0.24s;
+}
+
+/* =========================================================
+   HERO (bosh sahifa)
+   ========================================================= */
+
+.hero {
+  padding: 72px 0 56px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-eyebrow {
+  font-family: var(--font-head);
+  color: var(--accent);
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 0.5em;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+}
+
+.hero-photo {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+.hero-photo img {
+  border-radius: 0;
+}
+
+@media (max-width: 760px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 48px;
+  }
+  .hero-photo {
+    order: -1;
+  }
+}
+
+/* =========================================================
+   TUGMALAR
+   ========================================================= */
+
+.btn-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-head);
+  font-size: 0.9rem;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #06170c;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.btn-primary:hover {
+  color: #06170c;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(79, 217, 122, 0.25);
+}
+
+.btn-ghost {
+  color: var(--text);
+}
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   TARMOQ / TERMINAL PANEL (bitta jonli akcent element)
+   ========================================================= */
+
+.terminal {
+  margin: 56px 0;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.terminal-bar {
+  display: flex;
+  gap: 6px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-panel-2);
+}
+.terminal-bar span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+}
+.terminal-bar span:nth-child(1) {
+  background: #e5605080;
+}
+.terminal-bar span:nth-child(2) {
+  background: #e5c85080;
+}
+.terminal-bar span:nth-child(3) {
+  background: var(--accent-dim);
+}
+.terminal-body {
+  padding: 22px 24px;
+  font-family: var(--font-head);
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+.terminal-body .line {
+  margin-bottom: 6px;
+}
+.terminal-body .key {
+  color: var(--accent);
+}
+
+/* =========================================================
+   VOQEALAR / TIMELINE BLOKLARI (hikoya sahifalari uchun)
+   ========================================================= */
+
+.page-intro {
+  padding: 56px 0 24px;
+}
+.page-intro h1 {
+  font-size: clamp(1.7rem, 3.6vw, 2.3rem);
+}
+
+.story-block {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 36px;
+  align-items: center;
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+.story-block:nth-child(even) .story-photo {
+  order: 2;
+}
+
+.story-photo {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition:
+    transform 0.4s ease,
+    border-color 0.4s ease;
+}
+.story-photo:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-dim);
+}
+
+.story-tag {
+  display: inline-block;
+  font-family: var(--font-head);
+  font-size: 0.78rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.story-text h2 {
+  font-size: 1.4rem;
+}
+
+@media (max-width: 720px) {
+  .story-block,
+  .story-block:nth-child(even) .story-photo {
+    grid-template-columns: 1fr;
+    order: -1;
+  }
+  .story-block {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Ko'nikmalar / faktlar ro'yxati (chiplar) */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.chip {
+  font-family: var(--font-head);
+  font-size: 0.82rem;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-muted);
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 0 40px;
+}
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-inner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+.footer-links {
+  display: flex;
+  gap: 18px;
+}
+.footer-links a {
+  color: var(--text-muted);
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+}
+.footer-links a:hover {
+  color: var(--accent);
+}
