@@ -1,168 +1,843 @@
-<!doctype html>
-<html lang="uz">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Abdulaziz Hakimov — Men haqimda</title>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <!-- ===== HEADER: barcha sahifalarda bir xil ===== -->
-    <header class="site-header">
-      <div class="header-inner">
-        <a href="./index.html" class="logo">~/<span>abdulaziz</span></a>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME WORLD — Масштабный игровой портал</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #05050a;
+            --bg-card: rgba(18, 18, 30, 0.75);
+            --bg-card-hover: rgba(28, 28, 48, 0.85);
+            --neon-blue: #00f3ff;
+            --neon-purple: #b000ff;
+            --neon-red: #ff0055;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-        <input type="checkbox" id="nav-toggle" class="nav-toggle" />
-        <label
-          for="nav-toggle"
-          class="nav-toggle-label"
-          aria-label="Menyuni ochish"
-        >
-          <span></span><span></span><span></span>
-        </label>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        <nav class="main-nav">
-          <a href="./index.html" aria-current="page">Bosh sahifa</a>
-          <a href="./yoshligim.html">Yoshligim</a>
-          <a href="./maktab.html">Maktab</a>
-          <a href="./coddycamp.html">CoddyCamp</a>
-          <a href="./pdp.html">PDP</a>
-        </nav>
-      </div>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(176, 0, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 243, 255, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, h4, .logo, .nav-links, .btn {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--neon-purple);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-blue);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(5, 5, 10, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .header-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            -webkit-text-fill-color: var(--neon-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        .nav-links a:hover, .nav-links a:target {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+            background: rgba(0, 243, 255, 0.05);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-btn {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+            border: none;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(176, 0, 255, 0.4);
+            transition: var(--transition);
+        }
+
+        .profile-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--neon-blue);
+        }
+
+        /* Main Container & Page Sections */
+        .main-container {
+            max-width: 1440px;
+            margin: 100px auto 40px;
+            padding: 0 30px;
+        }
+
+        .page-section {
+            padding-top: 40px;
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 60px;
+        }
+
+        /* Hero Banner Section */
+        .hero-section {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 500px;
+            border: 1px solid var(--border-glass);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 50px;
+            background: linear-gradient(rgba(5,5,10,0.3), rgba(5,5,10,0.8)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: flex-end;
+            padding: 50px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+        }
+
+        .hero-tag {
+            background: var(--neon-red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 0 0 10px var(--neon-red);
+        }
+
+        .hero-title {
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-neon {
+            background: var(--neon-blue);
+            color: var(--bg-color);
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn-neon:hover {
+            background: white;
+            box-shadow: 0 0 30px white;
+            transform: translateY(-2px);
+        }
+
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-glass);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn-glass:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--neon-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Section Headings */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--neon-blue);
+            padding-left: 15px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .section-link {
+            color: var(--neon-blue);
+            font-size: 14px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .section-link:hover {
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* Game Grid & Cards */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.25);
+            background: var(--bg-card-hover);
+        }
+
+        .card-img-wrap {
+            position: relative;
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .game-card:hover .card-img-wrap img {
+            transform: scale(1.1);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--neon-blue);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+        }
+
+        .card-content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-genre {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .card-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-glass);
+            color: var(--text-muted);
+        }
+
+        .rating {
+            color: #ffaa00;
+        }
+
+        /* Ad Banners */
+        .ad-banner {
+            background: linear-gradient(135deg, rgba(176, 0, 255, 0.15), rgba(0, 243, 255, 0.15));
+            border: 1px solid var(--neon-purple);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            margin: 40px 0;
+            box-shadow: 0 0 30px rgba(176, 0, 255, 0.15);
+        }
+
+        .ad-banner h3 {
+            font-size: 26px;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        .ad-banner p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        /* Categories Chips Bar */
+        .categories-chips {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            margin-bottom: 35px;
+        }
+
+        .chip {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .chip:hover {
+            background: var(--neon-blue);
+            color: var(--bg-color);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+        }
+
+        /* News Section Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .news-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .news-card:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 10px 30px rgba(176, 0, 255, 0.2);
+        }
+
+        .news-img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-date {
+            font-size: 11px;
+            color: var(--neon-blue);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .news-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .news-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background: #030307;
+            border-top: 1px solid var(--border-glass);
+            padding: 60px 0 30px;
+        }
+
+        .footer-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: white;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: 0;
+            width: 30px; height: 2px;
+            background: var(--neon-blue);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--neon-blue);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 20px 30px 0;
+            border-top: 1px solid var(--border-glass);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        @media(max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero-section {
+                height: 400px;
+                padding: 20px;
+            }
+            .hero-title {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#home" class="logo">
+                <i class="fa-solid fa-gamepad"></i> GAME WORLD
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#catalog">Все игры</a></li>
+                <li><a href="#categories">Категории</a></li>
+                <li><a href="#news">Новости</a></li>
+                <li><a href="#ratings">Рейтинги</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+            <div class="header-actions">
+                <a href="#profile" class="profile-btn"><i class="fa-solid fa-user"></i> Профиль</a>
+            </div>
+        </div>
     </header>
 
-    <main>
-      <!-- ===== HERO ===== -->
-      <section class="hero">
-        <div class="appear">
-          <p class="hero-eyebrow">// frontend &amp; fullstack developer</p>
-          <h1>Salom, men Abdulazizman.</h1>
-          <p>
-            Toshkentda yashayman, React va Node.js bilan veb-ilovalar quraman,
-            shu bilan birga CoddyCamp Academy’da boshlang‘ich dasturchilarga
-            MERN stackni o‘rgataman. Bu sayt — mening yo‘lim haqida: bolalik,
-            maktab, CoddyCamp va PDP bosqichlari.
-          </p>
-          <div class="btn-row">
-            <a href="./yoshligim.html" class="btn btn-primary"
-              >Hikoyani boshlash</a
-            >
-            <a href="mailto:abdulazizhakimov13@gmail.com" class="btn btn-ghost"
-              >Bog‘lanish</a
-            >
-          </div>
-        </div>
+    <!-- Main Content Area (Pure HTML & CSS Layout) -->
+    <div class="main-container">
 
-        <div class="hero-photo appear appear-delay-1">
-          <img
-            src="https://picsum.photos/600/400"
-            alt="Abdulazizning ish joyi"
-          />
-        </div>
-      </section>
+        <!-- HOME SECTION -->
+        <section id="home" class="page-section" style="border:none; padding-top:20px;">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <span class="hero-tag">Эксклюзив • Хиты 2026</span>
+                    <h1 class="hero-title">CYBERPUNK ODYSSEY 2088</h1>
+                    <p class="hero-desc">Погрузитесь в мрачный киберпанк-мир будущего. Исследуйте мегаполис, модифицируйте тело и вершите судьбы корпораций.</p>
+                    <div class="hero-btns">
+                        <a href="#catalog" class="btn-neon"><i class="fa-solid fa-play"></i> Играть сейчас</a>
+                        <a href="#catalog" class="btn-glass">Подробнее</a>
+                    </div>
+                </div>
+            </div>
 
-      <!-- ===== TERMINAL PANEL: qisqa "profil" ko'rinishida ===== -->
-      <section class="terminal appear appear-delay-1">
-        <div class="terminal-bar"><span></span><span></span><span></span></div>
-        <div class="terminal-body">
-          <p class="line"><span class="key">ism:</span> Abdulaziz Hakimov</p>
-          <p class="line">
-            <span class="key">joylashuv:</span> Toshkent, O‘zbekiston
-          </p>
-          <p class="line">
-            <span class="key">rol:</span> Frontend / Fullstack Developer, Mentor
-            @ CoddyCamp
-          </p>
-          <p class="line">
-            <span class="key">stack:</span> React, Next.js, TypeScript, Node.js,
-            MongoDB
-          </p>
-          <p class="line">
-            <span class="key">holat:</span> yangi loyihalar va imkoniyatlarga
-            ochiqman
-          </p>
-        </div>
-      </section>
+            <!-- Categories Quick Chips -->
+            <div class="categories-chips">
+                <a href="#categories" class="chip">🔥 Все жанры</a>
+                <a href="#categories" class="chip">Action</a>
+                <a href="#categories" class="chip">RPG</a>
+                <a href="#categories" class="chip">Shooter</a>
+                <a href="#categories" class="chip">Racing</a>
+                <a href="#categories" class="chip">Strategy</a>
+                <a href="#categories" class="chip">Horror</a>
+                <a href="#categories" class="chip">Survival</a>
+                <a href="#categories" class="chip">Open World</a>
+            </div>
 
-      <!-- ===== TO'RT BOSQICHGA HAVOLALAR ===== -->
-      <section>
-        <h2 class="appear">Yo‘lim to‘rt bosqichda</h2>
+            <div class="section-header">
+                <h2 class="section-title">🔥 Популярные игры</h2>
+                <a href="#catalog" class="section-link">Смотреть все →</a>
+            </div>
+            <div class="games-grid">
+                <!-- Cards 1-8 -->
+                <div class="game-card">
+                    <div class="card-img-wrap"><span class="card-badge">ХИТ</span><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=500&q=80" alt="Game"></div>
+                    <div class="card-content"><h3 class="card-title">Cyberpunk Odyssey</h3><span class="card-genre">Action / RPG</span><div class="card-info-row"><span class="rating"><i class="fa-solid fa-star"></i> 4.9</span><span><i class="fa-solid fa-users"></i> 14.2K</span></div></div>
+                </div>
+                <div class="game-card">
+                    <div class="card-img-wrap"><span class="card-badge">НОВИНКА</span><img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=500&q=80" alt="Game"></div>
+                    <div class="card-content"><h3 class="card-title">Shadow Blade</h3><span class="card-genre">Action</span><div class="card-info-row"><span class="rating"><i class="fa-solid fa-star"></i> 4.7</span><span><i class="fa-solid fa-users"></i> 8.5K</span></div></div>
+                </div>
+                <div class="game-card">
+                    <div class="card-img-wrap"><span class="card-badge">ТОП</span><img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=500&q=80" alt="Game"></div>
+                    <div class="card-content"><h3 class="card-title">Starfall Arena</h3><span class="card-genre">Shooter</span><div class="card-info-row"><span class="rating"><i class="fa-solid fa-star"></i> 4.8</span><span><i class="fa-solid fa-users"></i> 25.1K</span></div></div>
+                </div>
+                <div class="game-card">
+                    <div class="card-img-wrap"><span class="card-badge">ХИТ</span><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=500&q=80" alt="Game"></div>
+                    <div class="card-content"><h3 class="card-title">Dragon's Realm</h3><span class="card-genre">RPG</span><div class="card-info-row"><span class="rating"><i class="fa-solid fa-star"></i> 4.9</span><span><i class="fa-solid fa-users"></i> 19.3K</span></div></div>
+                </div>
+                <div class="game-card">
+                    <div class="card-img-wrap"><span class="card-badge">ГОНКИ</span><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=500&q=80" alt="Game"></div>
+                    <div class="card-content"><h3 class="card-title">Neon Velocity</h3><span class="card-genre">Racing</span><div class="card-info-row"><span class="rating"><i class="fa-solid fa-star"></i> 4.6</span><span><i class="fa-solid fa-users"></i> 11.1K</span></div></div>
+                </div>
+                <div class="game-card">
+                    <div class="card-img-wrap"><span class="card-badge">ХОРРОР</span><img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=500&q=80" alt="Game"></div>
+                    <div class="card-content"><h3 class="card-title">Dead Silence</h3><span class="card-genre">Horror</span><div class="card-info-row"><span class="rating"><i class="fa-solid fa-star"></i> 4.5</span><span><i class="fa-solid fa-users"></i> 6.4K</span></div></div>
+                </div>
+                <div class="game-card">
+                    <div class="card-img-wrap"><span class="card-badge">ТАКТИКА</span><img src="https://images.unsplash.com/photo-1612287233202-b51b36618c07?auto=format&fit=crop&w=500&q=80" alt="Game"></div>
+                    <div class="card-content"><h3 class="card-title">Tactical Command</h3><span class="card-genre">Strategy</span><div class="card-info-row"><span class="rating"><i class="fa-solid fa-star"></i> 4.7</span><span><i class="fa-solid fa-users"></i> 9.2K</span></div></div>
+                </div>
+                <div class="game-card">
+                    <div class="card-img-wrap"><span class="card-badge">ВЫЖИВАНИЕ</span><img src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=500&q=80" alt="Game"></div>
+                    <div class="card-content"><h3 class="card-title">Apex Survival</h3><span class="card-genre">Survival</span><div class="card-info-row"><span class="rating"><i class="fa-solid fa-star"></i> 4.8</span><span><i class="fa-solid fa-users"></i> 16.7K</span></div></div>
+                </div>
+            </div>
 
-        <div class="story-block appear">
-          <div class="story-photo">
-            <img src="https://picsum.photos/600/400" alt="Yoshlik yillari" />
-          </div>
-          <div class="story-text">
-            <span class="story-tag">01 · Boshlanish</span>
-            <h2>Yoshligim</h2>
-            <p>
-              Qiziqishlarim va birinchi qadamlarim qanday boshlangani haqida.
-            </p>
-            <a href="./yoshligim.html" class="btn btn-ghost">Batafsil o‘qish →</a>
-          </div>
-        </div>
+            <!-- Ad Banner -->
+            <div class="ad-banner">
+                <h3>СПЕЦИАЛЬНОЕ ПРЕДЛОЖЕНИЕ СЕЗОНА</h3>
+                <p>Получите эксклюзивные внутриигровые бонусы и премиум-статус бесплатно!</p>
+                <a href="#catalog" class="btn-neon">Активировать бонус</a>
+            </div>
+        </section>
 
-        <div class="story-block appear">
-          <div class="story-photo">
-            <img src="https://picsum.photos/600/400" alt="Maktab yillari" />
-          </div>
-          <div class="story-text">
-            <span class="story-tag">02 · Ta’lim</span>
-            <h2>Maktab</h2>
-            <p>
-              Maktabdagi yillarim, sevimli fanlarim va birinchi kompyuter
-              tajribalarim.
-            </p>
-            <a href="./maktab.html" class="btn btn-ghost">Batafsil o‘qish →</a>
-          </div>
-        </div>
+        <!-- CATALOG SECTION -->
+        <section id="catalog" class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">🎮 Каталог всех игр (Масштабная база)</h2>
+            </div>
+            <div class="games-grid">
+                <!-- Generating multiple repetitive high quality cards for volume -->
+                <script>/* (rendered via static HTML) */</script>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">ХИТ</span><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=500&q=80" alt="G"></div><div class="card-content"><h3 class="card-title">Quantum Breach</h3><span class="card-genre">Action</span><div class="card-info-row"><span class="rating">★ 4.9</span><span>👥 12K</span></div></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">RPG</span><img src="https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?auto=format&fit=crop&w=500&q=80" alt="G"></div><div class="card-content"><h3 class="card-title">Elysium Chronicles</h3><span class="card-genre">RPG</span><div class="card-info-row"><span class="rating">★ 4.8</span><span>👥 15K</span></div></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">SHOOTER</span><img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=500&q=80" alt="G"></div><div class="card-content"><h3 class="card-title">Zero Gravity Warfare</h3><span class="card-genre">Shooter</span><div class="card-info-row"><span class="rating">★ 4.7</span><span>👥 22K</span></div></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">RACING</span><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=500&q=80" alt="G"></div><div class="card-content"><h3 class="card-title">HyperDrive 2099</h3><span class="card-genre">Racing</span><div class="card-info-row"><span class="rating">★ 4.6</span><span>👥 9K</span></div></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">STRATEGY</span><img src="https://images.unsplash.com/photo-1612287233202-b51b36618c07?auto=format&fit=crop&w=500&q=80" alt="G"></div><div class="card-content"><h3 class="card-title">Stellar Empire</h3><span class="card-genre">Strategy</span><div class="card-info-row"><span class="rating">★ 4.8</span><span>👥 7K</span></div></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">HORROR</span><img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=500&q=80" alt="G"></div><div class="card-content"><h3 class="card-title">The Facility X</h3><span class="card-genre">Horror</span><div class="card-info-row"><span class="rating">★ 4.5</span><span>👥 5K</span></div></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">SURVIVAL</span><img src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=500&q=80" alt="G"></div><div class="card-content"><h3 class="card-title">Frostbite Protocol</h3><span class="card-genre">Survival</span><div class="card-info-row"><span class="rating">★ 4.7</span><span>👥 11K</span></div></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">ARCADE</span><img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=500&q=80" alt="G"></div><div class="card-content"><h3 class="card-title">Neon Dash Infinity</h3><span class="card-genre">Arcade</span><div class="card-info-row"><span class="rating">★ 4.9</span><span>👥 18K</span></div></div></div>
+            </div>
+        </section>
 
-        <div class="story-block appear">
-          <div class="story-photo">
-            <img src="https://picsum.photos/600/400" alt="CoddyCamp" />
-          </div>
-          <div class="story-text">
-            <span class="story-tag">03 · Dasturlash</span>
-            <h2>CoddyCamp</h2>
-            <p>
-              Dasturlashni o‘rganishim va endi boshqalarga mentor bo‘lib xizmat
-              qilishim.
-            </p>
-            <a href="./coddycamp.html" class="btn btn-ghost">Batafsil o‘qish →</a>
-          </div>
-        </div>
+        <!-- CATEGORIES SECTION -->
+        <section id="categories" class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">📁 Все игровые жанры и категории</h2>
+            </div>
+            <div class="games-grid">
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">ЖАНР</span><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=500&q=80" alt=""></div><div class="card-content"><h3 class="card-title">Action</h3><span class="card-genre">350+ игр</span></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">ЖАНР</span><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=500&q=80" alt=""></div><div class="card-content"><h3 class="card-title">RPG</h3><span class="card-genre">240+ игр</span></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">ЖАНР</span><img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=500&q=80" alt=""></div><div class="card-content"><h3 class="card-title">Shooter</h3><span class="card-genre">180+ игр</span></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">ЖАНР</span><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=500&q=80" alt=""></div><div class="card-content"><h3 class="card-title">Racing</h3><span class="card-genre">120+ игр</span></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">ЖАНР</span><img src="https://images.unsplash.com/photo-1612287233202-b51b36618c07?auto=format&fit=crop&w=500&q=80" alt=""></div><div class="card-content"><h3 class="card-title">Strategy</h3><span class="card-genre">95+ игр</span></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">ЖАНР</span><img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=500&q=80" alt=""></div><div class="card-content"><h3 class="card-title">Horror</h3><span class="card-genre">85+ игр</span></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">ЖАНР</span><img src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=500&q=80" alt=""></div><div class="card-content"><h3 class="card-title">Survival</h3><span class="card-genre">110+ игр</span></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">ЖАНР</span><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=500&q=80" alt=""></div><div class="card-content"><h3 class="card-title">Open World</h3><span class="card-genre">150+ игр</span></div></div>
+            </div>
+        </section>
 
-        <div class="story-block appear">
-          <div class="story-photo">
-            <img src="https://picsum.photos/600/400" alt="PDP" />
-          </div>
-          <div class="story-text">
-            <span class="story-tag">04 · Bugungi kun</span>
-            <h2>PDP</h2>
-            <p>PDP bilan bog‘liq tajribam va bugungi kundagi maqsadlarim.</p>
-            <a href="./pdp.html" class="btn btn-ghost">Batafsil o‘qish →</a>
-          </div>
-        </div>
-      </section>
-    </main>
+        <!-- NEWS SECTION -->
+        <section id="news" class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">📰 Игровые новости и статьи</h2>
+            </div>
+            <div class="news-grid">
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" alt="News" class="news-img">
+                    <div class="news-content">
+                        <div class="news-date">16 Июня 2026 • Автор: Alex Mercer</div>
+                        <h3 class="news-title">Анонс грандиозного обновления для Cyberpunk Odyssey</h3>
+                        <p class="news-desc">Разработчики представили дорожную карту на следующие полгода. Игроков ждет новый континент и транспорт.</p>
+                        <a href="#home" class="btn-glass" style="padding: 6px 15px; font-size: 12px;">Читать статью</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" alt="News" class="news-img">
+                    <div class="news-content">
+                        <div class="news-date">14 Июня 2026 • Автор: Elena Vance</div>
+                        <h3 class="news-title">Топ 10 самых ожидаемых релизов конца года</h3>
+                        <p class="news-desc">Какие проекты стоит ждать на ПК и консолях нового поколения? Подробный аналитический разбор.</p>
+                        <a href="#home" class="btn-glass" style="padding: 6px 15px; font-size: 12px;">Читать статью</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="News" class="news-img">
+                    <div class="news-content">
+                        <div class="news-date">10 Июня 2026 • Автор: Admin</div>
+                        <h3 class="news-title">Турнир по Starfall Arena с призовым фондом $1,000,000</h3>
+                        <p class="news-desc">Лучшие команды со всего мира сойдутся в грандиозной битве за звание чемпиона сезона.</p>
+                        <a href="#home" class="btn-glass" style="padding: 6px 15px; font-size: 12px;">Читать статью</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- ===== FOOTER: barcha sahifalarda bir xil ===== -->
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <p>&copy; 2026 Abdulaziz Hakimov</p>
-        <div class="footer-links">
-          <a
-            href="https://github.com/hakimov0545"
-            target="_blank"
-            rel="noopener"
-            >GitHub</a
-          >
-          <a href="https://t.me/a_hakimov_m" target="_blank" rel="noopener"
-            >Telegram</a
-          >
-          <a href="mailto:abdulazizhakimov13@gmail.com">Email</a>
+        <!-- RATINGS SECTION -->
+        <section id="ratings" class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">🏆 Рейтинги и топы лучших игр</h2>
+            </div>
+            <div class="games-grid">
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">#1 ТОП</span><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=500&q=80" alt=""></div><div class="card-content"><h3 class="card-title">Cyberpunk Odyssey</h3><span class="card-genre">Рейтинг: 4.9 / 5.0</span></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">#2 ТОП</span><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=500&q=80" alt=""></div><div class="card-content"><h3 class="card-title">Dragon's Realm</h3><span class="card-genre">Рейтинг: 4.9 / 5.0</span></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">#3 ТОП</span><img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=500&q=80" alt=""></div><div class="card-content"><h3 class="card-title">Starfall Arena</h3><span class="card-genre">Рейтинг: 4.8 / 5.0</span></div></div>
+                <div class="game-card"><div class="card-img-wrap"><span class="card-badge">#4 ТОП</span><img src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=500&q=80" alt=""></div><div class="card-content"><h3 class="card-title">Apex Survival</h3><span class="card-genre">Рейтинг: 4.8 / 5.0</span></div></div>
+            </div>
+        </section>
+
+        <!-- FAQ SECTION -->
+        <section id="faq" class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">❓ Частые вопросы (FAQ)</h2>
+            </div>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-glass); padding: 30px; border-radius: 16px; line-height: 1.6;">
+                <h3 style="color:var(--neon-blue); margin-bottom: 10px;">Как играть на портале GAME WORLD?</h3>
+                <p style="color:var(--text-muted); margin-bottom: 20px;">Большинство игр запускаются прямо в браузере или через клиент портала. Выберите проект и нажмите кнопку «Играть».</p>
+                <h3 style="color:var(--neon-blue); margin-bottom: 10px;">Бесплатны ли игры?</h3>
+                <p style="color:var(--text-muted);">На портале представлен огромный выбор бесплатных проектов, а также каталог AAA-хитов с прямыми ссылками.</p>
+            </div>
+        </section>
+
+        <!-- CONTACTS SECTION -->
+        <section id="contacts" class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">📞 Контакты и поддержка</h2>
+            </div>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-glass); padding: 30px; border-radius: 16px; max-width: 600px;">
+                <p style="color:var(--text-muted); margin-bottom: 20px;">Служба технической поддержки работает 24/7. Напишите нам, если у вас возникли вопросы.</p>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <input type="text" placeholder="Ваше имя" style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); padding:12px; border-radius:8px; color:white; outline:none;">
+                    <input type="email" placeholder="Email" style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); padding:12px; border-radius:8px; color:white; outline:none;">
+                    <textarea placeholder="Ваше сообщение..." style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); padding:12px; border-radius:8px; color:white; outline:none; min-height:100px;"></textarea>
+                    <button class="btn-neon" style="width: fit-content; border:none; cursor:pointer;">Отправить</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE SECTION -->
+        <section id="profile" class="page-section" style="border:none;">
+            <div class="section-header">
+                <h2 class="section-title">👤 Профиль игрока</h2>
+            </div>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-glass); padding: 30px; border-radius: 16px; display: flex; align-items: center; gap: 30px; flex-wrap: wrap;">
+                <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue)); display: flex; align-items: center; justify-content: center; font-size: 40px; box-shadow: 0 0 20px var(--neon-blue);">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                </div>
+                <div>
+                    <h3 style="font-size: 24px; margin-bottom: 5px;">CyberGamer_99</h3>
+                    <p style="color: var(--neon-blue); font-size: 14px; margin-bottom: 10px;">Статус: Премиум Игрок</p>
+                    <p style="color: var(--text-muted); font-size: 13px;">Пройдено игр: 42 | Достижения: 184 / 250 | Избранное: 15 игр</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>GAME WORLD</h4>
+                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.6;">Масштабный геймерский портал с огромной базой игр, новостей, обзоров и комьюнити.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Категории</h4>
+                <ul>
+                    <li><a href="#categories">Action & Shooter</a></li>
+                    <li><a href="#categories">RPG & Strategy</a></li>
+                    <li><a href="#categories">Racing & Arcade</a></li>
+                    <li><a href="#categories">Horror & Survival</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Навигация</h4>
+                <ul>
+                    <li><a href="#news">Игровые новости</a></li>
+                    <li><a href="#ratings">Рейтинги и топы</a></li>
+                    <li><a href="#faq">Частые вопросы</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Подписка</h4>
+                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 15px;">Узнавайте о новинках первыми!</p>
+                <div style="display: flex; gap: 5px;">
+                    <input type="email" placeholder="Email..." style="background:rgba(0,0,0,0.4); border:1px solid var(--border-glass); padding:8px 12px; border-radius:6px; color:white; outline:none; font-size:12px; width:100%;">
+                    <button class="btn-neon" style="padding: 8px 15px; font-size: 12px; border:none; cursor:pointer;">OK</button>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 GAME WORLD. Все права защищены.</p>
+            <div style="display: flex; gap: 15px;">
+                <a href="#home"><i class="fa-brands fa-discord fa-lg"></i></a>
+                <a href="#home"><i class="fa-brands fa-telegram fa-lg"></i></a>
+                <a href="#home"><i class="fa-brands fa-youtube fa-lg"></i></a>
+                <a href="#home"><i class="fa-brands fa-twitch fa-lg"></i></a>
+            </div>
+        </div>
     </footer>
-  </body>
+
+</body>
 </html>
